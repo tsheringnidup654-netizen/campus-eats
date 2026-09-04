@@ -1,8 +1,13 @@
 exports.createOrder = (req, res) => {
-  const { itemName, price } = req.body;
 
-  // TODO next lab: save this to the orders table through Order.js instead
-  const order = { itemName, price, placedAt: new Date() };
+  const order = {
+    itemName: req.body.itemName,
+    price: req.body.price
+  };
 
-  res.render('order_confirmation', { title: 'Order Confirmed', order });
+  res.render('order_confirmation', {
+    title: 'Order Confirmed — Campus Eats',
+    order
+  });
+
 };
