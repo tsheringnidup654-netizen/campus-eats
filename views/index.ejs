@@ -1,37 +1,43 @@
 <%- include('partials/header') %>
 
 <section class="hero">
-  <span class="eyebrow">Multi-restaurant ordering</span>
-  <h1>Welcome to Campus Eats</h1>
-  <p>Order from multiple restaurants, all in one place.</p>
+    <span class="eyebrow">Multi-restaurant ordering</span>
+
+    <h1>Welcome to Campus Eats</h1>
+
+    <p>Order from multiple restaurants, all in one place.</p>
 </section>
 
 <section class="restaurants">
-  <h2>Popular Restaurants</h2>
+    <h2>Popular Restaurants</h2>
 
-  <div class="restaurant-grid">
-    <% restaurants.forEach(r => { %>
+    <div class="restaurant-grid">
 
-      <div class="restaurant-card">
+        <% restaurants.forEach(r => { %>
 
-        <div class="avatar">
-          <%= r.name.charAt(0) %>
+        <div class="restaurant-card">
+
+            <div class="avatar">
+                <%= r.name.charAt(0) %>
+            </div>
+
+            <h3><%= r.name %></h3>
+
+            <p><%= r.cuisine %></p>
+
+            <span class="rating-pill">
+                ★ <%= r.rating %>
+            </span>
+
+            <a href="/restaurants/<%= r.id %>/menu" class="btn">
+                View Menu
+            </a>
+
         </div>
 
-        <h3><%= r.name %></h3>
+        <% }); %>
 
-        <p><%= r.cuisine %></p>
-
-        <span class="rating-pill">
-          ★ <%= r.rating %>
-        </span>
-
-        <a href="/restaurants/<%= r.id %>/menu" class="btn">View Menu</a> 
-
-      </div>
-
-    <% }); %>
-  </div>
+    </div>
 </section>
 
 <%- include('partials/footer') %>

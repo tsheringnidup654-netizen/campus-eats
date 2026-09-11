@@ -1,3 +1,3 @@
 exports.getAbout = (req, res) => {
-  res.render('about', { title: 'About Campus Eats' });
+    res.render('about', { title: 'About Campus Eats' });
 };
