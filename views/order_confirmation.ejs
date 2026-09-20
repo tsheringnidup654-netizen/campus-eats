@@ -10,11 +10,21 @@
 
     <p>
       You ordered:
-      <strong><%= order.itemName %></strong>
-      — Nu. <%= order.price %>
+      <strong><%= order.item_name %></strong> × <%= order.quantity %>
+      — Nu. <%= (order.price_at_order * order.quantity).toFixed(2) %>
     </p>
 
-    <a href="/" class="btn">Back to Menu</a>
+    <form method="POST" action="/orders/<%= order.id %>/update" class="quantity-form">
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" min="1" value="<%= order.quantity %>">
+      <button type="submit" class="btn btn-secondary">Update</button>
+    </form>
+
+    <form method="POST" action="/orders/<%= order.id %>/cancel">
+      <button type="submit" class="btn btn-danger">Cancel Order</button>
+    </form>
+
+    <a href="/" class="btn">Back to Home</a>
   </div>
 </section>
 
