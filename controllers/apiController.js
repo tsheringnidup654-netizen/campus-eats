@@ -38,20 +38,17 @@ exports.getOrder = async (req, res) => {
 };
 
 exports.createOrder = async (req, res) => {
-    const { itemId } = req.body;
+  const { itemId } = req.body;
+  const item = await MenuItem.getMenuItemById(itemId);
 
-    const item = await MenuItem.getMenuItemById(itemId);
+  if (!item) {
+    return res.status(400).json({ error: 'Invalid menu item' });
+  }
 
-    if (!item) {
-        return res.status(400).json({
-            error: 'Invalid menu item'
-        });
-    }
-
-    const order = await Order.createOrder(item.id, item.price);
-
-    res.status(201).json(order);
+  const order = await Order.createOrder(item.id, item.price, req.session.user.id);
+  res.status(201).json(order);
 };
+
 
 exports.getStats = async (req, res) => {
     const stats = await Order.getStats();
