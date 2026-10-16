@@ -1,3 +1,7 @@
+const {
+    isValidSherubtseEmail,
+    EMAIL_SUFFIX
+} = require('../utils/validators');
 const crypto = require('crypto');
 const User = require('../models/User');
 
@@ -5,8 +9,6 @@ const {
     sendVerificationEmail,
     sendPasswordResetEmail
 } = require('../config/mailer');
-
-const EMAIL_SUFFIX = '.sherubtse@rub.edu.bt';
 
 exports.showSignup = (req, res) => {
     res.render('signup', {
@@ -17,14 +19,12 @@ exports.showSignup = (req, res) => {
 
 exports.signup = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
-
-        if (!name || !email || !password) {
-            return res.render('signup', {
-                title: 'Sign Up',
-                error: 'All fields are required.'
-            });
-        }
+        if (!isValidSherubtseEmail(email)) {
+    return res.render('signup', {
+        title: 'Sign Up',
+        error: `Please use your Sherubtse College email, ending in ${EMAIL_SUFFIX}.`
+    });
+}
 
         const normalizedEmail =
             email.trim().toLowerCase();

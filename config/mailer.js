@@ -9,8 +9,11 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendVerificationEmail(toEmail, token) {
-    const link =
-        `${process.env.APP_URL}/verify/${token}`;
+    
+    const link = `${process.env.APP_URL}/verify/${token}`;
+
+
+
 
     await transporter.sendMail({
         from: `"Campus Eats" <${process.env.GMAIL_USER}>`,
@@ -31,8 +34,7 @@ async function sendVerificationEmail(toEmail, token) {
 }
 
 async function sendPasswordResetEmail(toEmail, token) {
-    const link =
-        `${process.env.APP_URL}/reset-password/${token}`;
+     const link = `${process.env.APP_URL}/reset-password/${token}`;
 
     await transporter.sendMail({
         from: `"Campus Eats" <${process.env.GMAIL_USER}>`,
